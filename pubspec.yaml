@@ -1,0 +1,28 @@
+name: flutter_invitereferrals
+description: A Flutter InviteReferrals plugin.
+version: 0.0.1
+author: Neeraj Sharma
+homepage: https://github.com/tagnpin/flutter-invitereferrals
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.20.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.flutter.invitereferrals
+        pluginClass: InviteReferralsPlugin
+      ios:
+        pluginClass: InviteReferralsPlugin
+
+

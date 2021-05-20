@@ -1,0 +1,40 @@
+group 'com.flutter.invitereferrals'
+version '1.0.0'
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.0.1'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 19
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation 'com.android.installreferrer:installreferrer:2.2'
+    implementation 'com.invitereferrals.invitereferrals:invitereferrals:v29-1.0.7'
+} 
