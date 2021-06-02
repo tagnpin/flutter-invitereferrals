@@ -1,6 +1,7 @@
 package com.flutter.invitereferrals;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import com.invitereferrals.invitereferrals.IRInterfaces.IRTrackingCallback;
 import com.invitereferrals.invitereferrals.IRInterfaces.InviteReferralsSharingInterface;
 import com.invitereferrals.invitereferrals.IRInterfaces.UserDetailsCallback;
 import com.invitereferrals.invitereferrals.InviteReferralsApi;
+import com.invitereferrals.invitereferrals.InviteReferralsApplication;
 
 import org.json.JSONObject;
 
@@ -24,14 +26,14 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 
 /**
- * FlutterInvitereferralsPlugin
+ * InviteReferralsPlugin
  */
 public class InviteReferralsPlugin implements FlutterPlugin, MethodCallHandler, ActivityAware {
 
     private MethodChannel channel;
 
     private static final String TAG = "InviteReferrals";
-    private static final String PLUGIN_VERSION = "1.0.0";
+    private static final String PLUGIN_VERSION = "1.0.2";
 
     private static final String INLINE_BUTTON = "inline_btn";
     private static final String USER_DETAILS = "userDetails";
@@ -46,12 +48,17 @@ public class InviteReferralsPlugin implements FlutterPlugin, MethodCallHandler, 
     private static final String GET_LINK_INFO = "getLinkInfo";
     private static final String SHOW_POP_UP = "showPopUp";
 
-    private static final String CALLBACK_TEST = "test";
-
-
     private Context flutterContext;
     private Activity activity;
 
+    public static void register(Context context) {
+        Log.i(TAG, "REGISTER !!");
+        try {
+            InviteReferralsApplication.register((Application) context.getApplicationContext());
+        } catch (Exception e) {
+            Log.i(TAG, "REGISTER ERROR : " + e.toString());
+        }
+    }
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -130,30 +137,12 @@ public class InviteReferralsPlugin implements FlutterPlugin, MethodCallHandler, 
             case GET_LINK_INFO:
                 getLinkInfo();
                 break;
-            case CALLBACK_TEST:
-                test(call, result);
-                break;
             default:
                 Log.e(TAG, "Invalid action : " + action);
                 result.notImplemented();
         }
     }
 
-    private void test(MethodCall call, final Result result) {
-        Log.i(TAG, "test  !!");
-        try {
-            InviteReferralsApi.getInstance(flutterContext).closeButtonListener(new IRCloseButtonCallbackInterface() {
-                @Override
-                public void HandleDoneButtonAction() {
-                    channel.invokeMethod("callTestResuls",1);
-                    Log.i(TAG, "success test !!");
-                    //result.success("success");
-                }
-            });
-        } catch (Exception e) {
-            Log.e(TAG, "CLOSE BUTTON LISTENER ERROR :" + e);
-        }
-    }
 
     private void sharing_screen(MethodCall fetchData) {
         Log.i(TAG, "SHARING SCREEN !!");
@@ -264,13 +253,13 @@ public class InviteReferralsPlugin implements FlutterPlugin, MethodCallHandler, 
         }
 
         try {
-            mValue1 = fetchData.argument("mValue1");
+            mValue1 = fetchData.argument("referCode");
         } catch (Exception e) {
             Log.e(TAG, "M-VALUE1 ERROR :" + e);
         }
 
         try {
-            mValue2 = fetchData.argument("mValue2");
+            mValue2 = fetchData.argument("uniqueCode");
         } catch (Exception e) {
             Log.e(TAG, "M-VALUE2 ERROR :" + e);
         }
@@ -408,7 +397,8 @@ public class InviteReferralsPlugin implements FlutterPlugin, MethodCallHandler, 
             InviteReferralsApi.getInstance(flutterContext).closeButtonListener(new IRCloseButtonCallbackInterface() {
                 @Override
                 public void HandleDoneButtonAction() {
-                    result.success("success");
+                    channel.invokeMethod("HandleDoneButton", "success");
+                    //result.success("success");
                 }
             });
         } catch (Exception e) {

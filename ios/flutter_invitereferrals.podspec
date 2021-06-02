@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_invitereferrals'
-  s.version          = '0.0.1'
+  s.version          = '1.0.1'
   s.summary          = 'A Flutter InviteReferrals plugin.'
   s.description      = 'Allows you to easily add InviteReferrals to your flutter projects'
   s.homepage         = 'https://www.invitereferrals.com/'
