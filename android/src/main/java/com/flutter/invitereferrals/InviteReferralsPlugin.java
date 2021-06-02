@@ -33,7 +33,7 @@ public class InviteReferralsPlugin implements FlutterPlugin, MethodCallHandler, 
     private MethodChannel channel;
 
     private static final String TAG = "InviteReferrals";
-    private static final String PLUGIN_VERSION = "1.0.2";
+    private static final String PLUGIN_VERSION = "1.0.3";
 
     private static final String INLINE_BUTTON = "inline_btn";
     private static final String USER_DETAILS = "userDetails";

@@ -13,6 +13,7 @@
 
 
     <application
+        android:theme="@style/Theme.AppCompat.NoActionBar"
         android:allowBackup="true"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true" />

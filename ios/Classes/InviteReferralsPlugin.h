@@ -2,7 +2,7 @@
 #import <InviteReferrals/InviteReferrals.h>
 
 #define TAG @"FLUTTER-INVITEREFERRALS"
-#define PLUGIN_VERSION @"1.0.2"
+#define PLUGIN_VERSION @"1.0.3"
 #define INLINE_BUTTON @"inline_btn"
 #define USER_DETAILS @"userDetails"
 #define TRACKING @"tracking"
